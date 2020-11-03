@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>MathBox - Empty</title>
+  <script src="../build/quantum-main.js"></script>
+  <link rel="stylesheet" href="../build/quantum.css">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+<body>
+  <script>
+    var mathbox = mathBox({
+      plugins: ['core', 'controls', 'cursor', 'mathbox'],
+      controls: {
+        // Orbit controls, i.e. Euler angles, with gimbal lock
+        klass: THREE.OrbitControls,
+
+        // Trackball controls, i.e. Free quaternion rotation
+        //klass: THREE.TrackballControls,
+      },
+    });
+    if (mathbox.fallback) throw "WebGL not supported"
+
+    var three = mathbox.three;
+    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+
+
+
+    // Do stuff with mathbox,
+    // for example: (see docs/intro.md)
+
+
+    // Place camera
+    var camera =
+      mathbox
+      .camera({
+        proxy: true,
+        position: [0, 0, 10],
+        lookAt: [0,0,0],
+
+
+
+      });
+
+    // 2D cartesian
+    var view =
+      mathbox
+      .polar({
+        range: [[-π, π, 0], [0, π, 0], [-π, π, 1]],
+        scale: [9, 9, 9],
+      });
+
+    // Axes + grid
+    view
+      .axis({
+        axis: 1,
+        width: 3,
+      })
+      .axis({
+        axis: 2,
+        width: 3,
+      })
+      .grid({
+        width: 2,
+        divideX: 20,
+        divideY: 10,
+
+      });
+
+    // Make axes black
+    mathbox.select('axis').set('color', 'black');
+
+    // Calibrate focus distance for units
+    mathbox.set('focus', 2);
+
+
+    // π
+
+                      var data =
+                        view
+                        .interval({
+                          expr: function (emit, x, i, t) {
+                            emit(x, 2*Math.sin(432*432*t)*Math.cos(t*0.001));
+                          },
+                          width: 64,
+                          channels: 2,
+                        });
+                      var curve =
+                        view
+                        .line({
+                          width: 3,
+                          color: '#ffee00',
+                        });
+                      var points =
+                        view
+                        .point({
+                          size: 7,
+                          color: '#ffee00',
+                        });
+
+                        var data =
+                          view
+                          .interval({
+                            expr: function (emit, x, i, t) {
+                              emit(x, 2*Math.sin(9*432*t)*Math.cos(t*0.001));
+                            },
+                            width: 64,
+                            channels: 2,
+                          });
+                        var curve =
+                          view
+                          .line({
+                            width: 3,
+                            color: '#4de94c',
+                          });
+                        var points =
+                          view
+                          .point({
+                            size: 7,
+                            color: '#4de94c',
+                          });
+
+ /*
+
+ var data =
+   view
+   .interval({
+     expr: function (emit, x, i, t) {
+       emit(x, 2*Math.sin(x+(x*t)/(2*x*t) +t));
+     },
+     width: 64,
+     channels: 2,
+   });
+ var curve =
+   view
+   .line({
+     width: 3,
+     color: '#3090FF',
+   });
+ var points =
+   view
+   .point({
+     size: 7,
+     color: '#3090FF',
+   });
+   var data =
+     view
+     .interval({
+       expr: function (emit, x, i, t) {
+         emit(x, 2*Math.cos(x+(x*t)/(2*x*t) +t));
+       },
+       width: 64,
+       channels: 2,
+     });
+   var curve =
+     view
+     .line({
+       width: 3,
+       color: '#3090FF',
+     });
+   var points =
+     view
+     .point({
+       size: 7,
+       color: '#3090FF',
+     });
+
+ */
+                              var data =
+                                view
+                                .interval({
+                                  expr: function (emit, x, i, t) {
+                                    emit(x, 2*Math.sin((9*x + t))*2*Math.cos((9*x + t) ));
+                                  },
+                                  width: 64,
+                                  channels: 2,
+                                });
+                              var curve =
+                                view
+                                .line({
+                                  width: 3,
+                                  color: '#3090FF',
+                                });
+                              var points =
+                                view
+                                .point({
+                                  size: 7,
+                                  color: '#3090FF',
+                                });
+
+                                var data =
+                                  view
+                                  .interval({
+                                    expr: function (emit, x, i, t) {
+                                      emit(x, 2*Math.sin((6*x + t))*2*Math.cos((6*x + t) ));
+                                    },
+                                    width: 64,
+                                    channels: 2,
+                                  });
+                                var curve =
+                                  view
+                                  .line({
+                                    width: 3,
+                                    color: '#3090FF',
+                                  });
+                                var points =
+                                  view
+                                  .point({
+                                    size: 7,
+                                    color: '#3090FF',
+                                  });
+
+                                var data =
+                                  view
+                                  .interval({
+                                    expr: function (emit, x, i, t) {
+                                      emit(x, 2*Math.sin((3*x + t))*2*Math.cos((3*x + t) ));
+                                    },
+                                    width: 64,
+                                    channels: 2,
+                                  });
+                                var curve =
+                                  view
+                                  .line({
+                                    width: 3,
+                                    color: '#3090FF',
+                                  });
+                                var points =
+                                  view
+                                  .point({
+                                    size: 7,
+                                    color: '#3090FF',
+                                  });
+
+
+                                  var data =
+                                    view
+                                    .interval({
+                                      expr: function (emit, x, i, t) {
+                                        emit(x, 2*Math.sin((7*x + t))*2*Math.cos((7*x + t) ));
+                                      },
+                                      width: 64,
+                                      channels: 2,
+                                    });
+                                  var curve =
+                                    view
+                                    .line({
+                                      width: 3,
+                                      color: '#fff111',
+                                    });
+                                  var points =
+                                    view
+                                    .point({
+                                      size: 7,
+                                      color: '##fff111',
+                                    });
+
+                                    var data =
+                                      view
+                                      .interval({
+                                        expr: function (emit, x, i, t) {
+                                          emit(x, 2*Math.sin((5*x + t))*2*Math.cos((5*x + t) ));
+                                        },
+                                        width: 64,
+                                        channels: 2,
+                                      });
+                                    var curve =
+                                      view
+                                      .line({
+                                        width: 3,
+                                        color: '#fff111',
+                                      });
+                                    var points =
+                                      view
+                                      .point({
+                                        size: 7,
+                                        color: '##fff111',
+                                      });
+
+                                      var data =
+                                        view
+                                        .interval({
+                                          expr: function (emit, x, i, t) {
+                                            emit(x, 2*Math.sin((4*x + t))*2*Math.cos((4*x + t) ));
+                                          },
+                                          width: 64,
+                                          channels: 2,
+                                        });
+                                      var curve =
+                                        view
+                                        .line({
+                                          width: 3,
+                                          color: '#f39c12',
+                                        });
+                                      var points =
+                                        view
+                                        .point({
+                                          size: 7,
+                                          color: '#f39c12',
+                                        });
+
+                                        var data =
+                                          view
+                                          .interval({
+                                            expr: function (emit, x, i, t) {
+                                              emit(x, 2*Math.sin((2*x + t))*2*Math.cos((2*x + t) ));
+                                            },
+                                            width: 64,
+                                            channels: 2,
+                                          });
+                                        var curve =
+                                          view
+                                          .line({
+                                            width: 3,
+                                            color: '#9b59b6',
+                                          });
+                                        var points =
+                                          view
+                                          .point({
+                                            size: 7,
+                                            color: '#9b59b6',
+                                          });
+                                          var data =
+                                            view
+                                            .interval({
+                                              expr: function (emit, x, i, t) {
+                                                emit(x, 2*Math.sin((x + t))*2*Math.cos((x + t) ));
+                                              },
+                                              width: 64,
+                                              channels: 2,
+                                            });
+                                          var curve =
+                                            view
+                                            .line({
+                                              width: 3,
+                                              color: '#ff9999',
+                                            });
+                                          var points =
+                                            view
+                                            .point({
+                                              size: 7,
+                                              color: '#ff9999',
+                                            });
+    var play = mathbox.play({
+
+    });
+
+    //
+
+
+  </script>
+</body>
+</html>

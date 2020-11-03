@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Cymatics</title>
+  <script src="../build/quantum-main.js"></script>
+  <link rel="stylesheet" href="../build/quantum.css">
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+<body>
+  <script>
+    var mathbox = mathBox({
+      plugins: ['core', 'controls', 'cursor', 'mathbox'],
+      controls: {
+        // Orbit controls, i.e. Euler angles, with gimbal lock
+        klass: THREE.OrbitControls,
+
+        // Trackball controls, i.e. Free quaternion rotation
+        //klass: THREE.TrackballControls,
+      },
+    });
+    if (mathbox.fallback) throw "WebGL not supported"
+
+    var three = mathbox.three;
+    three.renderer.setClearColor(new THREE.Color(0xFFFFFF), 1.0);
+
+
+
+    // Do stuff with mathbox,
+    // for example: (see docs/intro.md)
+
+
+    // Place camera
+    var camera =
+      mathbox
+      .camera({
+        proxy: true,
+        position: [0, 0, 10],
+        lookAt: [0,0,0],
+
+
+
+      });
+
+    // 2D cartesian
+    var view =
+      mathbox
+      .polar({
+        range: [[-π, π, 0], [0, π, 0], [-π, π, 1]],
+        scale: [9, 9, 9],
+      });
+
+    // Axes + grid
+    view
+      .axis({
+        axis: 1,
+        width: 3,
+      })
+      .axis({
+        axis: 2,
+        width: 3,
+      })
+      .grid({
+        width: 2,
+        divideX: 20,
+        divideY: 10,
+
+      });
+
+    // Make axes black
+    mathbox.select('axis').set('color', 'black');
+
+    // Calibrate focus distance for units
+    mathbox.set('focus', 2);
+
+
+
+    // Add some data
+
+// graph 1 frequency shape
+    var data =
+      view
+      .interval({
+        expr: function (emit, x, i, t) {
+          emit(x, Math.sin(2*x*(π)*t)*Math.cos(t));
+        },
+        width: 64,
+        channels: 2,
+      });
+
+    // Draw a curve
+    var curve =
+      view
+      .line({
+        width: 3,
+        color: '#3090FF',
+      });
+
+    // Draw some points
+    var points =
+      view
+      .point({
+        size: 13,
+        color: '#3090FF',
+      });
+
+ /*
+// graph 2 inverse of graph 1 (harmonic occillation)
+      var data =
+        view
+        .interval({
+          expr: function (emit, x, i, t) {
+            emit(x, Math.cos(x*t*π) + Math.sin(x*(π*t)));
+          },
+          width: 64,
+          channels: 2,
+        });
+
+      // Draw a curve
+      var curve =
+        view
+        .line({
+          width: 5,
+          color: '#7afe8c',
+        });
+        // red #ff685c
+        // blue #5cd9ff
+      // Draw some points
+      var points =
+        view
+        .point({
+          size: 8,
+          color: '#7afe8c',
+        });
+
+// graph 3 membrane
+
+        var data =
+          view
+          .interval({
+            expr: function (emit, x, i, t) {
+              emit(x, Math.cos(x*π*t) - ((x/3))*Math.sin((π*x*t)));
+            },
+            width: 64,
+            channels: 2,
+          });
+
+        // Draw a curve
+        var curve =
+          view
+          .line({
+            width: 5,
+            color: '#e9fb3d',
+          });
+          // red #ff685c
+          // blue #5cd9ff
+        // Draw some points
+        var points =
+          view
+          .point({
+            size: 8,
+            color: '#e9fb3d',
+          });
+ */
+          // graph 4 membrane
+
+                  var data =
+                    view
+                    .interval({
+                      expr: function (emit, x, i, t) {
+                        emit(x, Math.sin((2*x*t*π)));
+                      },
+                      width: 64,
+                      channels: 2,
+                    });
+
+                  // Draw a curve
+                  var curve =
+                    view
+                    .line({
+                      width: 5,
+                      color: '#dc75fb',
+                    });
+                    // red #ff685c
+                    // blue #5cd9ff
+                  // Draw some points
+                  var points =
+                    view
+                    .point({
+                      size: 8,
+                      color: '#dc75fb',
+                    });
+
+                    // graph 5 membrane
+
+                            var data =
+                              view
+                              .interval({
+                                expr: function (emit, x, i, t) {
+                                  emit(x, Math.cos(1/Math.tan((x*t*π)/(0.03*x*π))));
+                                },
+                                width: 64,
+                                channels: 2,
+                              });
+
+                            // Draw a curve
+                            var curve =
+                              view
+                              .line({
+                                width: 5,
+                                color: '#f7347a',
+                              });
+                              // red #ff685c
+                              // blue #5cd9ff
+                            // Draw some points
+                            var points =
+                              view
+                              .point({
+                                size: 8,
+                                color: '#f7347a',
+                              });
+ /*
+                              // graph 5 membrane
+
+                                      var data =
+                                        view
+                                        .interval({
+                                          expr: function (emit, x, i, t) {
+                                            emit(x, Math.cos(3/Math.tan((x*t*π)/(0.03*x*π))));
+                                          },
+                                          width: 64,
+                                          channels: 2,
+                                        });
+
+                                      // Draw a curve
+                                      var curve =
+                                        view
+                                        .line({
+                                          width: 5,
+                                          color: '#5cd9ff',
+                                        });
+                                        // red #ff685c
+                                        // blue #5cd9ff
+                                      // Draw some points
+                                      var points =
+                                        view
+                                        .point({
+                                          size: 8,
+                                          color: '#5cd9ff',
+                                        });
+*/
+                                        // graph 1 frequency shape
+                                            var data =
+                                              view
+                                              .interval({
+                                                expr: function (emit, x, i, t) {
+                                                  emit(x, Math.sin(2*x*(π)*t)*Math.cos(t*π));
+                                                },
+                                                width: 64,
+                                                channels: 2,
+                                              });
+
+                                            // Draw a curve
+                                            var curve =
+                                              view
+                                              .line({
+                                                width: 3,
+                                                color: '#ff685c',
+                                              });
+
+                                            // Draw some points
+                                            var points =
+                                              view
+                                              .point({
+                                                size: 13,
+                                                color: '#ff685c',
+                                              });
+
+ /*
+    // Draw vectors
+    var data =
+      view.interval({
+        expr: function (emit, x, i, t) {
+
+          emit(x, Math.cos(3*x*t)*(Math.cos(x*(x*t)) + Math.sin(x*(x*t))));
+        },
+        width: 64,
+        channels: 2,
+        items: 2,
+      })
+      .vector({
+        end: false,
+        width: 5,
+        color: '#50A000',
+      });
+
+    // Draw ticks and labels
+    var scale =
+      view.scale({
+        divide: 20,
+      });
+
+    var ticks =
+      view.ticks({
+        width: 5,
+        size: 15,
+        color: 'black',
+      });
+
+    var format =
+      view.format({
+        digits: 2,
+        weight: 'bold',
+      });
+    // numbers
+    var labels =
+      view.label({
+        color: 'red',
+        zIndex: 1,
+        display:none,
+      });
+*/
+    // Animate
+    var play = mathbox.play({
+
+    });
+
+    //
+
+
+  </script>
+</body>
+</html>

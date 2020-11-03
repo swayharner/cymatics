@@ -1,0 +1,5 @@
+/node_modules/*
+/bower_modules/*
+.DS_Store
+.tmp/*
+release/cymatics-0.0.x*
